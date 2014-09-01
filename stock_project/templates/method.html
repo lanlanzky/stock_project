@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block content %}
+<p> 介绍几种常用的处理方法:</p>
+<div id='method'>
+	<div  id='pybrain'>
+	<table class="table table-striped">
+		<thead class="info">
+		<tr>	 <th> 方法 </th> 
+			 <th> 预测参数</th>
+			 <th class="success">目标值</th> 
+		     	 <th class="success"> 预测值</th>
+			 <th  class="danger"> 误差率 </th>
+		</tr>
+		<tr>
+			<th> Pybrain</th> 
+			<th>open,close,low,adjclose,volume</th>
+			<th> high</th> 
+			<th class="success"> high</th> 
+			<th>  true%</th> 
+		</tr>
+		</thead>
+		<tbody class="info"> 
+		 {% for i in test %}
+				<tr>
+				<td> pybrain </td>
+				<td> {{ i.open}},{{i.close}},{{ i.low }}，{{i.adjclose}}，{{i.volume }}</td>
+				<td class='zhenshi'> {{ i.high}}</td>
+				<td class='yuce'> 10.2 </td>
+				<td class='wucha'>  </td>
+				</tr> 
+		 {% endfor %}
+		</div>
+	</tbody>
+	</table>	
+	</div>
+	<div id='rgression'>
+	<table class="table table-striped">
+		<thead class="info">
+		<tr>
+			<th> 线性回归</th> 
+			<th>open,high,low,close,volume,adjclose</th>
+			<th class="success"> 类别</th> 
+			<th class="success"> 1,2,3</th> 
+			<th class="danger">  true%</th> 
+		</tr>
+		</thead>
+		<tbody class="info"> 
+		 {% for i in retest %}
+				<tr>
+				<td> Rgression</td>
+				<td> {{ i.open}},{{ i.high}},{{ i.low }},{{i.close}},{{i.volume }},{{i.adjclose}}</td>
+				<td class='z'> {{ mubiaolable}}</td>
+				<td class="y"> {{ testlable}} </td>
+				<td class='w'></td>
+				</tr> 
+		 {% endfor %}
+		</tbody>
+	</table>	
+	</div>
+	<div id='cpa'>
+        <table class="table table-striped">
+                <thead class="info">
+                <tr>
+                        <th> 主成分分析</th>
+                        <th> 成分数 </th>
+                        <th>方差百分比%</th>
+                        <th> 累积百分比%</th>
+                </tr>
+                </thead>
+                <tbody class="info">
+                 {% for i in pca %}
+                   <tr>
+				{% for j in i %}
+				<td>
+                                 {{j}}
+				 </td>
+                		 {% endfor %}
+                  </tr>
+                 {% endfor %}
+                </tbody>
+        </table>
+        </div>
+</div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+            $(document).ready(function(){
+		var zhen;
+		var yu;
+		zhen=$(".zhenshi").text()
+		yu=$(".yuce").text()
+		wu=(yu-zhen)/zhen
+		// wu=Math.round(wu*10000)/10000
+		wu=wu*100+'%'
+		$(".wucha").text(wu)
+		w='100%'
+		$(".w").text(w)
+            });
+</script>
+{% endblock %}

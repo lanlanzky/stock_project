@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}The current time{% endblock %}
+
+{% block content %}
+   <li>the name_of_stock is: {{ codename }} </li>
+ <form class="navbar-form  form-search navbar-left"  action="/search/" method="get">
+ <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <td>
+                <label  class="control-label" for="formGroupInputLarge">code_stock:</label>
+                </td>
+                <td>
+                <label  class="control-label" for="formGroupInputLarge">begin_date:</label>
+                </td>
+                <td>
+                <label class="control-label" for="formGroupInputLarge">end_date:</label>
+                </td>   
+                <td>
+                <label class="control-label" for="formGroupInputLarge">search:</label>
+                </td>   
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <input size="16" name='stock_code' type="text" class="form-control" placeholder="code_of_stcok eg.GOOG">
+                   </div>
+               </td>
+               <!--  <td>
+                    <div class="input-append date form_datetime">
+                    <div class="input-append date form_datetime "  data-date-format="dd MM yyyy " data-link-field="dtp_input1">
+                         <input size="16" type="text" class="form-control" value="" >
+                         <span class="glyphicon glyphicon-th"></span>
+                         <span class="add-on"></span>
+                    </div>
+                </td>
+                -->
+                <td > 
+                <div class="form-group">
+                     <div class="input-group date form_datetime col-md-12 " data-date="09-16-2000" data-date-format="dd MM yyyy " data-link-field="dtp_input1">
+                           <input class="form-control"  name="start" size="14" type="text" value="" readonly>
+                           <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                     </div>
+                    </div>
+                </td>
+                <td>
+                 <div class="input-group date form_datetime col-md-14" data-date="09-16-2000" data-date-format="dd MM yyyy " data-link-field="dtp_input1">
+                           <input class="form-control" name="end"size="14" type="text" value="" readonly>
+                           <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                     </div>
+                    </div>
+                </td>
+                <td>
+                    <button type="submit" class="btn"> <i class=" glyphicon glyphicon-search"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</form>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+        $(".form_datetime").datetimepicker({
+                    format: "dd-MM-yyyy ",
+                   // autoclose: true,
+                    todayBtn: true,
+                    minView:2,
+                    maxView:4,
+                    //endDate:Date(),
+                    todayHighlight:true,
+                    keyboardNavigatio:true,
+               //     minuteStep: 100 
+                 //   hourStep:6
+                        });
+</script>   
+{% endblock %}

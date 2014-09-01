@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+{% block css %}
+<link href="/static/css/pagination.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/demo.css" />
+{% endblock %}
+{% block content %}
+<nav id="bar-all" class="navbar navbar-default navbar-static" role="navigation">
+<div class="row">
+        <div id='bar-left' class="col-md-3">
+                <div  class="bs-sidebar hidden-print " role="complementary">
+                        <ul class="nav bs-sidenav">
+                                <li><a href="#KNN">KNN</a>
+                                        <ul class="nav">
+                                        <li >
+                                                <a href="#KNN-1">经典实例</a>
+                                        </li>
+                                        <li>
+                                                <a href="#KNN-2">图表展示</a>
+                                        </li>
+                                        </ul>
+                                </li>
+                                <li><a href="#BYES">贝叶斯</a>
+					 <ul class="nav">
+                                        <li >
+                                                <a href="#BYES-1">朴素贝叶斯</a>
+                                        </li>
+					</ul>
+                                </li>
+                                <li><a href="#DECI-TREE">决策树</a>
+					 <ul class="nav">
+                                        <li >
+                                                <a href="#DECI-1">ID3</a>
+                                        </li>
+                                        <li>
+                                                <a href="#DECI-2">CART</a>
+                                        </li>
+                                        </ul>
+                                </li>
+                                <li><a href="#svm">支持向量机</a>
+					 <ul class="nav">
+                                        <li >
+                                                <a href="#svm-smo">SMO </a>
+                                        </li>
+					</ul>
+                                </li>
+                                <li><a href="#kmeans">K均值</a>
+					 <ul class="nav">
+                                        <li >
+                                                <a href="#kmeans1">k-means</a>
+                                                <a href="#kmeans2">二分k均值</a>
+                                        </li>
+					</ul>
+                                </li>
+			</ul>
+                </div>
+        </div>
+        <div data-spy="scroll" data-target="#bar-all" data-offset="0" class="scrollspy-example">
+        <div class="col-md-9" role="main">
+                <div class="bs-docs-section">
+                        <div class="page-header">
+                                <h1 id="KNN">KNN算法</h1>
+                                <p class=""> KNN 分类算法-监督学习算法 </p>
+                                <p class=""> k-近邻采用测量不同特征值之间的距离方法进行分类,简言之就是求测试数据与所有样本集的距离，然后按照距离递增排序，求前K个，距离前K个的类别来判断测试数据的类别 [距离公式为：每个特征值的误差和再开方]</p>
+                        </div>
+                        <h3 id="KNN-1"> 预测约会网站上男士的三个特征在女士心中的分类</h3>
+			<div class="table-responsive">
+			<table id='lable1' class='table'>
+			<thead>	<tr> <th> playgametime</th> <th> fly-time </th> <th> eat-time</th> <th>TRUE-lable</th><th class='success'>TEST-lable</th></tr></thead>
+			<tbody>
+				{% for i in knn %}
+			<tr>
+					{% for j in i %}
+					<td id='test'> 
+					{{ j }} 
+					</td>
+					{% endfor %}
+			</tr>
+				{% endfor %}
+			</tbody>
+			</table>
+			</div>
+                        <h3 id="KNN-2"></h3>
+                        <div class="page-header">
+                                <h1 id="BYES">byes</h1>
+                                <p class="lead">
+</p>
+                        </div>
+                        <h3 id="BYES-1">NAIVE-BYES</h3>
+			<p> 一个最常用的朴素贝叶斯就是文档分类 </p>
+			<p> 判断一个邮件是不是垃圾邮件</p>
+			<table class='table'>
+			<thead>	<tr> <th> text-email</th> <th>TRUE-lable</th><th class='success'>TEST-lable</th></tr></thead>
+			<tbody>
+				{% for bye in byes%}
+			<tr>
+					{% for ny  in bye %}
+					<td id='test'> 
+					{{ ny }} 
+					</td>
+					{% endfor %}
+			</tr>
+				{% endfor %}
+			</tbody>
+			</table>
+                       <!--  <h3 id="BYES-2">CART</h3> -->
+                        <div class="page-header">
+                                <h1 id="DECI-TREE">决策树</h1>
+                                <p class="lead">
+</p>
+                        </div>
+                        <h3 id="DECI-1">ID3</h3>
+			<p> ID3缺点：只能处理属性值离散的情况 适用于标称型数据 </p>
+			<p> 根据一个人的四个特征，来判断适合哪种隐形眼镜</p>
+			<table class='table'>
+			<thead>	<tr> 
+				<th> age </th>
+				<th> prescript</th>
+				<th> astigmatic</th>
+				<th> terarfate</th>
+				<th> TRUE-lable </th>
+				<th class='test'>TEST-lable </th>
+			</tr></thead>
+			<tbody>
+				{% for i in deci %}
+			<tr>
+					{% for j in i %}
+					<td id='test'> 
+					{{ j }} 
+					</td>
+					{% endfor %}
+			</tr>
+				{% endfor %}
+			</tbody>
+			</table>
+                        <h3 id="DECI-2">CART</h3>
+                        <div class="page-header">
+                                <h1 id="svm">支持向量机</h1>
+                                <p class="lead">
+                        </div>
+                        <h3 id="svm-smo">序列最小化-支持向量机 </h3>
+			<table class='table'>
+			<thead>	<tr> 
+				<th> 参数1 </th>
+				<th> 参数2</th>
+				<th> TRUE-lable </th>
+				<th class='test'>TEST-lable </th>
+			</tr></thead>
+			<tbody>
+				{% for i in svm %}
+			<tr>
+					{% for j in i %}
+					<td id='test'> 
+					{{ j }} 
+					</td>
+					{% endfor %}
+			</tr>
+				{% endfor %}
+			</tbody>
+			</table>
+                        <div class="page-header">
+                                <h1 id="kmeasn">k均值聚类算法</h1>
+                                <p class="lead">
+                        </div>
+                        <h3 id="kmeans1">标准k-means算法</h3>
+			<p>假设你的朋友一晚上要去 70个不同的地方游玩，让你安排一个可行的计划。这样就可以正好用到k-means				的聚类，找到70个地方坐标的质心，然后安排交通工具到达质心，在步行到每个簇内地址</p> 
+			<P> 输入数据不再展示，经过5次迭代，显示最后的质心位置
+			<table class='table'>
+			<thead>	<tr> 
+				<th>坐标1 </th>
+				<th> 坐标2</th>
+			</tr></thead>
+			<tbody>
+			<tr>
+				{% for i in  kmeans%}
+					<td class='success'> 
+					{{ i }} 
+					</td>
+				{% endfor %}
+			</tr>
+			</tbody>
+			</table>
+                        <h3 id="kmeans2">二分k均值</h3>
+			
+        	</div>
+        </div>
+        </div>
+</div>
+</nav>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+            $(document).ready(function(){
+                //$("#lable1.test").each(function(){
+                $("tbody tr td:last-child").each(function(){
+			$(this).addClass("success");
+	  	});
+            });
+</script>
+{% endblock %}

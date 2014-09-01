@@ -1,0 +1,15 @@
+<div id="hiddenresult" style="display:none;">
+{% for new in newstock  %}
+{% cycle '<div class="result">' '' %}
+ <p>   {{ new.name }}</p>
+ <p>   {{ new.date }}</p>
+  <p>     {{ new.price}} </p>
+ <p>      {{ new.close}} </p>
+ <p>   {{ new.high}} </p>
+{% cycle '' '</div>' %}
+
+{% endfor %}
+</div>
+<script>
+initPagination()
+</script>

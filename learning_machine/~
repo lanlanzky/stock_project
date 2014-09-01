@@ -1,0 +1,64 @@
+#coding=utf8
+from numpy import *
+from django.http import HttpResponse
+from django.shortcuts import render_to_response
+from stock.models import New_Stock 
+from data_catch import get_data
+from pybrain.datasets import SupervisedDataSet
+from pybrain.tools.shortcuts import buildNetwork
+#归一化处理
+def normal(record):
+	return [round(float((i-min(record)))/(max(record)-min(record)),4) for i in record]
+#对数据库里的每一列进行归一化处理
+allopen=[]
+allhigh=[]
+alllow=[]
+allclose=[]
+allvolume=[]
+alladjclose=[]
+alldate=New_stock.objects.all()[0:10]
+for date in  alldate:
+	allopen.append(date.open)
+	allhigh.append(date.high)
+	alllow.append(date.low)
+	allclose.append(date.close)
+	allvolumn.append(date.volume)
+	alladjclose.append(date.adjclose)
+newallhigh=normal([ float(i)  for i in allhigh])
+newalllow=normal([ float(i)  for i in alllow])
+newallclose=normal([ float(i)  for i in allclose])
+newallvolume=normal([ float(i)  for i in allvolume])
+newalladjclose=normal([ float(i)  for i in alladjclose])
+newallopen=normal([ float(i)  for i in allopen])
+def all date():
+	newalldate=[]
+	for i in range(10):
+		test=[]	
+		test.append(newallopen[i])
+		test.append(newalllow[i])
+		test.append(newalclose[i])
+		test.append(newallhigh[i])
+		test.append(newallclose[i])
+		test.append(newallvolume[i])
+		test.append(newalladjclose[i])
+		newalldate.append(test)
+	return newalldate
+
+
+
+
+
+
+inputdata = SupervisedDataSet(6, 1)	
+inputdata.addSample((i.adj_close,i.volume,i.high,i.low,i.close,i.open_price), (i.low))
+	#the output dataset
+test=New_Stock.objects.filter(name='test')
+outputdata= SupervisedDataSet(6, 1)
+for i in test:
+outputdata.addSample((i.adj_close,i.volume,i.high,i.low,i.close,i.open_price), (0))	
+# train and test the network
+net = buildNetwork(4, 3, 1,bias=True)
+trainer = BackpropTrainer(net,inputdata,momentum=0.1,verbose=True,weightdecay=0.01)
+trainer.trainEpochs(epochs=100)
+trainer.train()
+out=net.activateOnDataset(outputdata)

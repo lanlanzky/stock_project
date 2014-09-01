@@ -1,0 +1,12 @@
+#coding=utf8
+import twitter
+import os
+import sys
+api = twitter.Api(consumer_key='7n0BTmcI3IzyebJsehYqfWrl1',consumer_secret='X3JdnxXiT25I7TFsYw6eeiWOMpapiLxMmqiNIk8kLnZGEkXcN9', access_token_key='2419117297-tDWblY55PR0KXdM5lbirj4W8qGZhPQdlh5XAOdL', access_token_secret='TEyRPc4l2b2sX4jBD8wM2qrIUbSbSJlXhN0C0m4XXPAu6')
+print api.VerifyCredentials()
+statuses = api.GetUserTimeline('liulanlan')
+print [s.user.name for s in statuses]
+users = api.GetFriends()
+print [u.name for u in users]
+
+#status = api.PostUpdate('I love python-twitter!')                             
